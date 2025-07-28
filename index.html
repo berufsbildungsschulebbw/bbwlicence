@@ -1,0 +1,1540 @@
+        .link-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+            text-decoration: none;
+            color: white;
+        }
+
+        .link-button::before {
+            content: '🔗';
+            font-size: 1.1em;
+        }
+
+        .link-button::after {
+            content: '↗';
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .link-button:hover::after {
+            transform: translate(3px, -3px);
+        }        .category-card::after {
+            content: "Klicken für Tools →";
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.9em;
+            color: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-card:hover::after {
+            opacity: 1;
+        }<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBW Lerntechnologie-Lizenzen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --recommended: #ec4899;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(to bottom right, #ede9fe, #fce7f3, #ddd6fe);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #6b7280;
+        }
+
+        /* Home Page Layout */
+        .home-page {
+            display: none;
+        }
+
+        .home-page.active {
+            display: block;
+        }
+
+        /* Filter Section on Home */
+        .home-filter-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .filter-title {
+            font-size: 1.6em;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-toggle {
+            display: flex;
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .toggle-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .filter-content {
+            display: none;
+        }
+
+        .filter-content.active {
+            display: block;
+        }
+
+        .function-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .function-tag {
+            padding: 10px 20px;
+            background: #f3f4f6;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .function-tag:hover {
+            background: #e5e7eb;
+        }
+
+        .function-tag.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .clear-filters {
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid #ef4444;
+            color: #ef4444;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .clear-filters:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* Filtered Results */
+        .filtered-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: white;
+        }
+
+        .category-badge.general { background: var(--success); }
+        .category-badge.request { background: var(--warning); }
+        .category-badge.free { background: var(--info); }
+        .category-badge.recommended { background: var(--recommended); }
+
+        .result-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .result-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .result-card p {
+            margin-bottom: 15px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .result-functions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .result-function {
+            padding: 3px 10px;
+            background: #f3f4f6;
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #6b7280;
+        }
+
+        /* Categories Grid */
+        .categories-section {
+            margin-top: 50px;
+        }
+
+        .categories-title {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-card::after {
+            content: 'Klicken für Tools →';
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.9em;
+            color: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-card:hover::after {
+            opacity: 1;
+        }
+
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            border-radius: 20px;
+        }
+
+        .category-card.general .category-icon { 
+            background: linear-gradient(135deg, #d1fae5, #6ee7b7);
+            color: var(--success);
+        }
+
+        .category-card.request .category-icon { 
+            background: linear-gradient(135deg, #fed7aa, #fb923c);
+            color: var(--warning);
+        }
+
+        .category-card.free .category-icon { 
+            background: linear-gradient(135deg, #bfdbfe, #60a5fa);
+            color: var(--info);
+        }
+
+        .category-card.recommended .category-icon { 
+            background: linear-gradient(135deg, #fce7f3, #f9a8d4);
+            color: var(--recommended);
+        }
+
+        .category-card h2 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .category-card p {
+            color: #6b7280;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Tools List Page */
+        .tools-page {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .tools-page.active {
+            display: block;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .back-button:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        .tools-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tools-header h2 {
+            font-size: 2.5em;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .tools-header p {
+            font-size: 1.2em;
+            color: #6b7280;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .tool-header {
+            padding: 30px;
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+        }
+
+        .tool-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .tool-name {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .tool-functions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tool-function {
+            padding: 5px 12px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        .tool-body {
+            padding: 30px;
+        }
+
+        .tool-description {
+            color: #6b7280;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .tool-access {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .info-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+        }
+
+        .info-button::before {
+            content: 'ℹ️';
+            font-size: 1.1em;
+        }
+
+        .info-button::after {
+            content: '→';
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .info-button:hover::after {
+            transform: translateX(3px);
+        }
+
+        .access-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .access-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .access-icon {
+            font-size: 1.2em;
+        }
+
+        /* Tool Detail Page */
+        .detail-page {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .detail-page.active {
+            display: block;
+        }
+
+        .detail-container {
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .detail-header {
+            padding: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .detail-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .detail-title {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .detail-category {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .detail-content {
+            padding: 50px;
+        }
+
+        .detail-section {
+            margin-bottom: 40px;
+        }
+
+        .detail-section h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .detail-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detail-section li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .detail-section li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .access-steps {
+            background: #f9fafb;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .access-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            margin-bottom: 5px;
+        }
+
+        .step-content p {
+            color: #6b7280;
+            margin: 0;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filtered-results {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        .no-results h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>BBW Lerntechnologie-Lizenzen</h1>
+            <p>Digitale Tools und Ressourcen für innovativen Unterricht</p>
+        </div>
+
+        <!-- Home Page (Level 1) -->
+        <div id="home-page" class="home-page active">
+            <!-- Filter Section -->
+            <div class="home-filter-section">
+                <div class="filter-header">
+                    <h2 class="filter-title">🔍 Tools entdecken</h2>
+                    <div class="filter-toggle">
+                        <button class="toggle-btn active" onclick="showCategories()">Nach Kategorien</button>
+                        <button class="toggle-btn" onclick="showFilters()">Nach Funktionen</button>
+                    </div>
+                </div>
+
+                <!-- Filter by Functions -->
+                <div id="filter-content" class="filter-content">
+                    <div class="function-filters" id="function-filters">
+                        <!-- Dynamically populated -->
+                    </div>
+                    <button class="clear-filters" onclick="clearFilters()">Alle Filter zurücksetzen</button>
+                    <div class="filtered-results" id="filtered-results">
+                        <!-- Filtered tools appear here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Section -->
+            <div id="categories-content" class="categories-section">
+                <h2 class="categories-title">Lizenzkategorien</h2>
+                <div class="categories">
+                    <div class="category-card general" onclick="showToolsList('general')">
+                        <div class="category-icon">🏫</div>
+                        <h2>Allgemeine Schullizenz</h2>
+                        <p>Für alle Lehrpersonen und Lernende verfügbar</p>
+                    </div>
+
+                    <div class="category-card request" onclick="showToolsList('request')">
+                        <div class="category-icon">📋</div>
+                        <h2>Schullizenz per Antrag</h2>
+                        <p>Limitierte Lizenzen auf Anfrage</p>
+                    </div>
+
+                    <div class="category-card free" onclick="showToolsList('free')">
+                        <div class="category-icon">🎁</div>
+                        <h2>Gratisangebote</h2>
+                        <p>Kostenlose Tools und Open-Source</p>
+                    </div>
+
+                    <div class="category-card recommended" onclick="showToolsList('recommended')">
+                        <div class="category-icon">⭐</div>
+                        <h2>Empfehlenswerte Angebote</h2>
+                        <p>Weitere nützliche Tools für den Unterricht</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools List Page (Level 2) -->
+        <div id="tools-page" class="tools-page">
+            <button class="back-button" onclick="goToHome()">← Zurück zur Übersicht</button>
+            <div class="tools-header">
+                <h2 id="tools-title"></h2>
+                <p id="tools-description"></p>
+            </div>
+            <div class="tools-grid" id="tools-grid">
+                <!-- Tools will be dynamically inserted -->
+            </div>
+        </div>
+
+        <!-- Tool Detail Page (Level 3) -->
+        <div id="detail-page" class="detail-page">
+            <button class="back-button" onclick="goToToolsList()">← Zurück zur Übersicht</button>
+            <div class="detail-container">
+                <div class="detail-header">
+                    <div class="detail-icon" id="detail-icon"></div>
+                    <h1 class="detail-title" id="detail-title"></h1>
+                    <span class="detail-category" id="detail-category"></span>
+                </div>
+                <div class="detail-content" id="detail-content">
+                    <!-- Details will be dynamically inserted -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Make toolsData globally accessible
+        let toolsData;
+        
+        // Data structure
+        toolsData = {
+            general: {
+                title: 'Allgemeine Schullizenzen',
+                description: 'Diese Tools stehen allen Lehrpersonen und Lernenden zur Verfügung',
+                tools: [
+                    {
+                        id: 'nanoo',
+                        name: 'nanoo.tv',
+                        icon: '📺',
+                        functions: ['Medienarchiv', 'Streaming', 'Videoschnitt'],
+                        description: 'Schweizer Medienplattform für Bildungsinstitutionen',
+                        url: 'https://nanoo.tv',
+                        access: {
+                            lp: 'Per Schullogin',
+                            students: 'Per Klassenlink'
+                        },
+                        details: {
+                            overview: 'nanoo.tv ist die führende Schweizer Medienplattform für Bildungsinstitutionen mit rechtssicherem Zugang zu TV-Inhalten.',
+                            features: [
+                                'Zugriff auf über 50 TV-Sender',
+                                'Videobearbeitung im Browser',
+                                'Erstellung von Playlists',
+                                'Integration in OLAT',
+                                'Rechtssichere Nutzung'
+                            ],
+                            accessSteps: [
+                                { title: 'Lehrpersonen', text: 'Anmeldung mit BBW-Login auf nanoo.tv' },
+                                { title: 'Lernende', text: 'Zugang über geteilte Links oder OLAT-Integration' },
+                                { title: 'Support', text: 'Schulungen über das Medienzentrum verfügbar' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'm365',
+                        name: 'Microsoft 365',
+                        icon: '💼',
+                        functions: ['Office-Programme', 'Cloud-Speicher', 'Kollaboration'],
+                        description: 'Komplette Office-Suite für Bildung',
+                        url: 'https://portal.office.com',
+                        access: {
+                            lp: 'Per Schullogin',
+                            students: 'Per Schullogin'
+                        },
+                        details: {
+                            overview: 'Microsoft 365 Education bietet eine vollständige Suite von Produktivitäts- und Kollaborationstools für moderne Bildungseinrichtungen.',
+                            features: [
+                                'Word, Excel, PowerPoint',
+                                'Teams für virtuelle Klassenzimmer',
+                                'OneNote als digitales Notizbuch',
+                                'OneDrive mit 1TB Speicher',
+                                'Forms für Umfragen und Tests'
+                            ],
+                            accessSteps: [
+                                { title: 'Erste Anmeldung', text: 'Portal.office.com mit BBW-Email' },
+                                { title: 'Apps installieren', text: 'Bis zu 5 Geräte pro Nutzer' },
+                                { title: 'Mobile Nutzung', text: 'Apps für iOS und Android verfügbar' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'adobe',
+                        name: 'Adobe Creative Cloud',
+                        icon: '🎨',
+                        functions: ['Grafikdesign', 'Videobearbeitung', 'Webdesign', 'Fotografie'],
+                        description: 'Professionelle Kreativ-Suite',
+                        url: 'https://creativecloud.adobe.com',
+                        access: {
+                            lp: 'Per Schullogin',
+                            students: 'Anfrage für TIKT/PIKT-Projekte'
+                        },
+                        details: {
+                            overview: 'Adobe Creative Cloud bietet Zugang zu über 20 professionellen Kreativ-Apps für Design, Video, Web und Fotografie.',
+                            features: [
+                                'Photoshop, Illustrator, InDesign',
+                                'Premiere Pro, After Effects',
+                                'Lightroom, XD',
+                                '100GB Cloud-Speicher',
+                                'Adobe Fonts und Stock Credits'
+                            ],
+                            accessSteps: [
+                                { title: 'Lehrpersonen', text: 'Anmeldung mit BBW-Account über Adobe Admin Console' },
+                                { title: 'Lernende für TIKT/PIKT', text: 'Anfrage für Klassenprojekte bei der Lehrperson stellen' },
+                                { title: 'Projektlizenzen', text: 'Temporäre Zugänge für spezifische Klassenprojekte möglich' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'fobizz',
+                        name: 'Fobizz',
+                        icon: '🤖',
+                        functions: ['KI-Assistenz', 'Unterrichtsmaterial', 'Fortbildung', 'Kollaboration'],
+                        description: 'KI-gestützte Unterrichtsplattform',
+                        url: 'https://fobizz.com',
+                        access: {
+                            lp: 'Per Schullizenz-Link',
+                            students: 'Code pro Lernende'
+                        },
+                        details: {
+                            overview: 'Fobizz ist eine KI-gestützte Plattform für Lehrkräfte zur digitalen Unterrichtsgestaltung und Fortbildung.',
+                            features: [
+                                'KI-Assistent für Unterrichtsmaterial',
+                                'Automatische Arbeitsblatt-Generierung',
+                                'Differenzierte Aufgaben erstellen',
+                                'KI-Bildgenerierung',
+                                'Fortbildungskurse'
+                            ],
+                            accessSteps: [
+                                { title: 'Lehrpersonen', text: 'Direkter Zugang über Schullizenz-Link (wird von IT bereitgestellt)' },
+                                { title: 'Lernraum erstellen', text: 'Lehrperson erstellt digitalen Lernraum in Fobizz' },
+                                { title: 'Lernende', text: 'Erhalten individuellen Code von der Lehrperson für Zugang zum Lernraum' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'toteach',
+                        name: 'To-Teach.ai',
+                        icon: '🧠',
+                        functions: ['KI-Unterricht', 'Personalisierung', 'Differenzierung', 'Arbeitsblätter'],
+                        description: 'KI für personalisierte Lernmaterialien',
+                        url: 'https://to-teach.ai',
+                        access: {
+                            lp: 'Per Fobizz-Konto',
+                            students: 'Nur für Lehrpersonen'
+                        },
+                        details: {
+                            overview: 'To-Teach.ai ist eine KI-basierte Plattform zur Erstellung personalisierter Lernmaterialien und differenzierter Aufgaben.',
+                            features: [
+                                'Personalisierte Arbeitsblätter',
+                                'Adaptive Lernpfade',
+                                'Differenzierung nach Niveau',
+                                'Integration mit Fobizz',
+                                'Lernstandsanalyse'
+                            ],
+                            accessSteps: [
+                                { title: 'Zugang', text: 'Automatischer Zugriff über bestehenden Fobizz-Account' },
+                                { title: 'Aktivierung', text: 'In Fobizz unter "Verbundene Apps" aktivieren' },
+                                { title: 'Hinweis', text: 'Ausschließlich für Lehrpersonen - kein direkter Schülerzugang' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'ethek',
+                        name: 'E-Thek',
+                        icon: '📚',
+                        functions: ['E-Books', 'Hörbücher', 'Digitale Medien', 'Zeitschriften'],
+                        description: 'Digitale Bibliothek',
+                        url: 'https://www.onleihe.net',
+                        access: {
+                            lp: 'Per Schullogin / Lernlounge',
+                            students: 'Per Schullogin / Lernlounge'
+                        },
+                        details: {
+                            overview: 'E-Thek ist die digitale Bibliothek der BBW mit umfangreichem Medienangebot für Bildungszwecke.',
+                            features: [
+                                'E-Books und digitale Lehrbücher',
+                                'Hörbücher und Podcasts',
+                                'Digitale Zeitschriften',
+                                'Fachzeitschriften',
+                                'Offline-Lesen möglich'
+                            ],
+                            accessSteps: [
+                                { title: 'Zugang Option 1', text: 'Anmeldung mit BBW-Login' },
+                                { title: 'Zugang Option 2', text: 'Anmeldung über Lernlounge-Konto' },
+                                { title: 'Mobile Apps', text: 'Onleihe-App für iOS und Android verfügbar' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'swissdox',
+                        name: 'Swissdox',
+                        icon: '📰',
+                        functions: ['Medienarchiv', 'Recherche', 'Zeitungsartikel', 'Pressespiegel'],
+                        description: 'Schweizer Mediendatenbank',
+                        url: 'https://swissdox.ch',
+                        access: {
+                            lp: 'Per M365-Login',
+                            students: 'Per M365-Login'
+                        },
+                        details: {
+                            overview: 'Swissdox ist die führende Schweizer Mediendatenbank mit Zugriff auf aktuelle und archivierte Artikel aus Schweizer Zeitungen und Zeitschriften.',
+                            features: [
+                                'Alle wichtigen Schweizer Medien',
+                                'Archiv bis in die 1990er Jahre',
+                                'Volltextsuche',
+                                'PDF-Export',
+                                'Themendossiers erstellen'
+                            ],
+                            accessSteps: [
+                                { title: 'Zugang', text: 'Anmeldung über Microsoft 365 Account (Single Sign-On)' },
+                                { title: 'Direktlink', text: 'https://swissdox.ch - automatische Weiterleitung nach M365-Login' },
+                                { title: 'Tipp', text: 'Suchergebnisse können als PDF exportiert und in OLAT geteilt werden' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'statista',
+                        name: 'Statista',
+                        icon: '📊',
+                        functions: ['Statistiken', 'Infografiken', 'Studien', 'Marktdaten'],
+                        description: 'Statistik-Portal',
+                        url: 'https://statista.com',
+                        access: {
+                            lp: 'Per Schullogin',
+                            students: 'Per Schullogin'
+                        },
+                        details: {
+                            overview: 'Statista ist das führende Statistik-Portal mit über 1 Million Statistiken, Studien und Infografiken aus 22.500 Quellen.',
+                            features: [
+                                'Über 1 Million Statistiken',
+                                'Aktuelle Studien und Reports',
+                                'Downloadbare Infografiken',
+                                'Branchenreports',
+                                'Exportfunktion für Präsentationen'
+                            ],
+                            accessSteps: [
+                                { title: 'Campus-Zugang', text: 'Automatischer Zugriff im BBW-Netzwerk oder per VPN' },
+                                { title: 'Persönlicher Account', text: 'Kostenlose Registrierung mit BBW-Email für Download-Funktionen' },
+                                { title: 'Nutzungshinweis', text: 'Quellenangabe bei Verwendung in Arbeiten erforderlich' }
+                            ]
+                        }
+                    }
+                ]
+            },
+            request: {
+                title: 'Schullizenzen per Antrag',
+                description: 'Diese Speziallizenzen sind in begrenzter Anzahl verfügbar',
+                tools: [
+                    {
+                        id: 'quizlet',
+                        name: 'Quizlet',
+                        icon: '🎯',
+                        functions: ['Lernkarten', 'Gamification', 'Tests', 'Live-Spiele'],
+                        description: 'Interaktive Lernplattform',
+                        url: 'https://quizlet.com',
+                        access: {
+                            lp: 'Per Einladungslink',
+                            students: 'Selbstregistration + Klassencode'
+                        },
+                        availability: '5 Teacher Plus Lizenzen',
+                        details: {
+                            overview: 'Quizlet revolutioniert das Lernen mit digitalen Karteikarten und spielerischen Elementen. Die Teacher Plus Lizenz bietet erweiterte Funktionen für den Unterricht.',
+                            features: [
+                                'Digitale Karteikarten mit Bildern und Audio',
+                                'Adaptive Lernmodi mit KI-Unterstützung',
+                                'Live-Spiele für die ganze Klasse',
+                                'Automatische Testgenerierung',
+                                'Fortschrittsverfolgung für alle Lernenden'
+                            ],
+                            accessSteps: [
+                                { title: 'Lizenzanfrage', text: 'Kontaktieren Sie das IT-Support-Team für eine Teacher Plus Lizenz' },
+                                { title: 'Lehrpersonen', text: 'Nach Genehmigung erhalten Sie einen Einladungslink' },
+                                { title: 'Lernende', text: 'Kostenlose Registrierung auf quizlet.com, dann mit Klassencode beitreten' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'actionbound',
+                        name: 'Actionbound',
+                        icon: '🗺️',
+                        functions: ['Digitale Schnitzeljagd', 'Outdoor-Learning', 'GPS-Rallyes', 'Gamification'],
+                        description: 'Interaktive Rallyes und Schnitzeljagden',
+                        url: 'https://actionbound.com',
+                        access: {
+                            lp: 'Per Account-Einladung',
+                            students: 'App + QR-Code'
+                        },
+                        availability: '3 EDU-Lizenzen',
+                        details: {
+                            overview: 'Actionbound macht aus dem Smartphone ein interaktives Lern-Tool für spannende Rallyes, Schnitzeljagden und ortsbezogenes Lernen.',
+                            features: [
+                                'GPS-basierte Aufgaben und Rätsel',
+                                'Multimedia-Inhalte (Videos, Audio, Bilder)',
+                                'QR-Code-Scanner Integration',
+                                'Offline-Modus verfügbar',
+                                'Punktesystem und Bestenlisten'
+                            ],
+                            accessSteps: [
+                                { title: 'Lizenzanfrage', text: 'Anfrage für EDU-Lizenz beim IT-Support' },
+                                { title: 'Bound erstellen', text: 'Lehrperson erstellt Bounds auf actionbound.com' },
+                                { title: 'Lernende', text: 'Kostenlose App herunterladen und Bound per QR-Code starten' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'fellofish',
+                        name: 'Fellofish',
+                        icon: '🐟',
+                        functions: ['Peer-Feedback', 'Kollaboration', 'Bewertung', 'Reflexion'],
+                        description: 'Strukturiertes Peer-Feedback',
+                        url: 'https://fellofish.com',
+                        access: {
+                            lp: 'Per Registrationslink',
+                            students: 'Per Kurseinladung'
+                        },
+                        availability: '2 Schullizenzen',
+                        details: {
+                            overview: 'Fellofish ermöglicht strukturiertes Peer-Feedback und fördert kollaboratives Lernen durch gegenseitige Bewertung und Reflexion.',
+                            features: [
+                                'Strukturierte Feedback-Prozesse',
+                                'Anonyme und offene Bewertungen',
+                                'Rubrik-basierte Beurteilung',
+                                'Reflexionstools',
+                                'Lernfortschritt-Visualisierung'
+                            ],
+                            accessSteps: [
+                                { title: 'Lizenzanfrage', text: 'Nur 2 Lizenzen verfügbar - frühzeitig anfragen' },
+                                { title: 'Lehrpersonen', text: 'Registrierung über bereitgestellten Link' },
+                                { title: 'Lernende', text: 'Einladung zum Kurs per E-Mail von der Lehrperson' }
+                            ]
+                        }
+                    }
+                ]
+            },
+            free: {
+                title: 'Gratisangebote',
+                description: 'Kostenlose Tools für den Bildungsbereich',
+                tools: [
+                    {
+                        id: 'h5p',
+                        name: 'H5P',
+                        icon: '🎮',
+                        functions: ['Interaktive Inhalte', 'Quizze', 'Videos', 'Präsentationen'],
+                        description: 'Open-Source für interaktive Inhalte',
+                        url: 'https://h5p.org',
+                        access: {
+                            lp: 'In OLAT integriert',
+                            students: 'Über Kursinhalte'
+                        },
+                        details: {
+                            overview: 'H5P ist ein Open-Source-Framework zur Erstellung interaktiver HTML5-Inhalte direkt in OLAT.',
+                            features: [
+                                'Über 40 verschiedene Inhaltstypen',
+                                'Interaktive Videos mit Quizfragen',
+                                'Drag-and-Drop Aufgaben',
+                                'Zeitstrahlen und Präsentationen',
+                                'Direkte OLAT-Integration'
+                            ],
+                            accessSteps: [
+                                { title: 'Für Lehrpersonen', text: 'In OLAT unter "Kursbaustein hinzufügen" → "H5P" verfügbar' },
+                                { title: 'Inhalte erstellen', text: 'Direkt im OLAT-Editor ohne zusätzliche Software' },
+                                { title: 'Für Lernende', text: 'Automatischer Zugriff über OLAT-Kurse' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'canva',
+                        name: 'Canva for Education',
+                        icon: '🎨',
+                        functions: ['Grafikdesign', 'Präsentationen', 'Videos', 'Infografiken'],
+                        description: 'Design-Tool für Bildung',
+                        url: 'https://www.canva.com/education',
+                        access: {
+                            lp: 'Selbstregistration mit Schul-Email',
+                            students: 'Per Klasseneinladung'
+                        },
+                        details: {
+                            overview: 'Canva for Education bietet alle Premium-Funktionen kostenlos für Bildungseinrichtungen.',
+                            features: [
+                                'Millionen von Vorlagen und Elementen',
+                                'Brand Kit für Schuldesign',
+                                'Video-Editor mit Effekten',
+                                'Unbegrenzter Cloud-Speicher',
+                                'Kollaborative Projekte'
+                            ],
+                            accessSteps: [
+                                { title: 'Lehrpersonen', text: 'Registrierung auf canva.com/education mit BBW-Email' },
+                                { title: 'Verifizierung', text: 'Automatische Verifizierung als Bildungseinrichtung' },
+                                { title: 'Lernende', text: 'Einladung per Link von der Lehrperson' }
+                            ]
+                        }
+                    }
+                ]
+            },
+            recommended: {
+                title: 'Empfehlenswerte Angebote',
+                description: 'Weitere nützliche Tools für innovative Lehrmethoden',
+                tools: [
+                    {
+                        id: 'padlet',
+                        name: 'Padlet',
+                        icon: '📌',
+                        functions: ['Digitale Pinnwand', 'Kollaboration', 'Brainstorming', 'Portfolio'],
+                        description: 'Virtuelle Pinnwand',
+                        url: 'https://padlet.com',
+                        access: {
+                            lp: 'Selbstregistration (3 Padlets gratis)',
+                            students: 'Per Padlet-Link'
+                        },
+                        details: {
+                            overview: 'Padlet ist eine virtuelle Pinnwand für kollaboratives Arbeiten, Ideensammlungen und digitale Portfolios.',
+                            features: [
+                                'Verschiedene Layouts (Wand, Timeline, Map, etc.)',
+                                'Multimedia-Posts (Text, Bilder, Videos, Audio)',
+                                'Echtzeit-Kollaboration',
+                                'Kommentar- und Like-Funktionen',
+                                'Export als PDF oder Bild'
+                            ],
+                            accessSteps: [
+                                { title: 'Kostenlose Version', text: '3 Padlets gleichzeitig in der Gratisversion' },
+                                { title: 'Lehrpersonen', text: 'Registrierung auf padlet.com mit beliebiger Email' },
+                                { title: 'Lernende', text: 'Kein Account nötig - Zugriff über geteilten Link' }
+                            ]
+                        }
+                    }
+                ]
+            }
+        };
+
+        // State management
+        let currentCategory = null;
+        let currentTool = null;
+        let activeFilters = new Set();
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeFunctionFilters();
+        });
+
+        // Initialize function filters
+        function initializeFunctionFilters() {
+            const allFunctions = new Set();
+            Object.values(toolsData).forEach(category => {
+                category.tools.forEach(tool => {
+                    tool.functions.forEach(func => allFunctions.add(func));
+                });
+            });
+
+            const filterContainer = document.getElementById('function-filters');
+            Array.from(allFunctions).sort().forEach(func => {
+                const tag = document.createElement('span');
+                tag.className = 'function-tag';
+                tag.textContent = func;
+                tag.onclick = () => toggleFilter(func);
+                filterContainer.appendChild(tag);
+            });
+        }
+
+        // Toggle between categories and filters
+        function showCategories() {
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.toggle-btn').classList.add('active');
+            document.getElementById('filter-content').classList.remove('active');
+            document.getElementById('categories-content').style.display = 'block';
+        }
+
+        function showFilters() {
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.toggle-btn')[1].classList.add('active');
+            document.getElementById('filter-content').classList.add('active');
+            document.getElementById('categories-content').style.display = 'none';
+            updateFilteredResults();
+        }
+
+        // Filter functions
+        function toggleFilter(func) {
+            if (activeFilters.has(func)) {
+                activeFilters.delete(func);
+            } else {
+                activeFilters.add(func);
+            }
+            updateFilterUI();
+            updateFilteredResults();
+        }
+
+        function clearFilters() {
+            activeFilters.clear();
+            updateFilterUI();
+            updateFilteredResults();
+        }
+
+        function updateFilterUI() {
+            document.querySelectorAll('.function-tag').forEach(tag => {
+                if (activeFilters.has(tag.textContent)) {
+                    tag.classList.add('active');
+                } else {
+                    tag.classList.remove('active');
+                }
+            });
+        }
+
+        function updateFilteredResults() {
+            const resultsContainer = document.getElementById('filtered-results');
+            resultsContainer.innerHTML = '';
+
+            if (activeFilters.size === 0) {
+                resultsContainer.innerHTML = '<div class="no-results"><h3>Wählen Sie Funktionen aus</h3><p>Klicken Sie auf die Funktions-Tags oben, um Tools zu filtern.</p></div>';
+                return;
+            }
+
+            let foundTools = [];
+            Object.entries(toolsData).forEach(([categoryKey, category]) => {
+                category.tools.forEach(tool => {
+                    const hasMatchingFunction = tool.functions.some(func => 
+                        activeFilters.has(func)
+                    );
+                    if (hasMatchingFunction) {
+                        foundTools.push({ ...tool, category: categoryKey, id: tool.id });
+                    }
+                });
+            });
+
+            if (foundTools.length === 0) {
+                resultsContainer.innerHTML = '<div class="no-results"><h3>Keine Tools gefunden</h3><p>Keine Tools entsprechen den ausgewählten Funktionen.</p></div>';
+                return;
+            }
+
+            foundTools.forEach(tool => {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+                
+                const categoryLabels = {
+                    general: 'Allgemeine Lizenz',
+                    request: 'Per Antrag',
+                    free: 'Gratis',
+                    recommended: 'Empfohlen'
+                };
+
+                card.innerHTML = `
+                    <span class="category-badge ${tool.category}">${categoryLabels[tool.category]}</span>
+                    <div class="result-icon">${tool.icon}</div>
+                    <h3>${tool.name}</h3>
+                    <p>${tool.description}</p>
+                    <div class="result-functions">
+                        ${tool.functions.map(func => 
+                            `<span class="result-function">${func}</span>`
+                        ).join('')}
+                    </div>
+                    <button class="info-button" onclick="showToolDetail(toolsData['${tool.category}'].tools.find(t => t.id === '${tool.id}'), '${tool.category}')">
+                        Mehr Informationen
+                    </button>
+                `;
+                
+                resultsContainer.appendChild(card);
+            });
+        }
+
+        // Navigation functions
+        function showToolsList(category) {
+            currentCategory = category;
+            document.getElementById('home-page').classList.remove('active');
+            document.getElementById('tools-page').classList.add('active');
+            
+            const categoryData = toolsData[category];
+            document.getElementById('tools-title').textContent = categoryData.title;
+            document.getElementById('tools-description').textContent = categoryData.description;
+            
+            const grid = document.getElementById('tools-grid');
+            grid.innerHTML = '';
+            
+            categoryData.tools.forEach(tool => {
+                const card = createToolCard(tool, category);
+                grid.appendChild(card);
+            });
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function createToolCard(tool, category) {
+            const card = document.createElement('div');
+            card.className = 'tool-card';
+            
+            card.innerHTML = `
+                <div class="tool-header">
+                    <div class="tool-icon">${tool.icon}</div>
+                    <h3 class="tool-name">${tool.name}</h3>
+                    <div class="tool-functions">
+                        ${tool.functions.map(func => 
+                            `<span class="tool-function">${func}</span>`
+                        ).join('')}
+                    </div>
+                </div>
+                <div class="tool-body">
+                    <p class="tool-description">${tool.description}</p>
+                    <div class="tool-access">
+                        <div class="access-item">
+                            <span class="access-icon">👨‍🏫</span>
+                            <span>Lehrpersonen: ${tool.access.lp}</span>
+                        </div>
+                        <div class="access-item">
+                            <span class="access-icon">👥</span>
+                            <span>Lernende: ${tool.access.students}</span>
+                        </div>
+                        ${tool.availability ? `
+                            <div class="access-item">
+                                <span class="access-icon">📊</span>
+                                <span>${tool.availability}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <button class="info-button" onclick="showToolDetail(toolsData['${category}'].tools.find(t => t.id === '${tool.id}'), '${category}')">
+                        Mehr Informationen
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function showToolDetail(tool, category) {
+            currentTool = tool;
+            document.getElementById('tools-page').classList.remove('active');
+            document.getElementById('home-page').classList.remove('active');
+            document.getElementById('detail-page').classList.add('active');
+            
+            const categoryLabels = {
+                general: 'Allgemeine Schullizenz',
+                request: 'Schullizenz per Antrag',
+                free: 'Gratisangebot',
+                recommended: 'Empfehlenswert'
+            };
+            
+            document.getElementById('detail-icon').textContent = tool.icon;
+            document.getElementById('detail-title').textContent = tool.name;
+            document.getElementById('detail-category').textContent = categoryLabels[category];
+            
+            const content = document.getElementById('detail-content');
+            
+            // Default details if not specified
+            const details = tool.details || {
+                overview: tool.description,
+                features: tool.functions.map(f => `${f} Funktionalität`),
+                accessSteps: [
+                    { title: 'Lehrpersonen', text: tool.access.lp },
+                    { title: 'Lernende', text: tool.access.students }
+                ]
+            };
+            
+            content.innerHTML = `
+                <div class="detail-section">
+                    <h3>Überblick</h3>
+                    <p>${details.overview}</p>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>Funktionen</h3>
+                    <div class="tool-functions">
+                        ${tool.functions.map(func => 
+                            `<span class="tool-function">${func}</span>`
+                        ).join('')}
+                    </div>
+                </div>
+                
+                ${details.features ? `
+                    <div class="detail-section">
+                        <h3>Hauptmerkmale</h3>
+                        <ul>
+                            ${details.features.map(feature => 
+                                `<li>${feature}</li>`
+                            ).join('')}
+                        </ul>
+                    </div>
+                ` : ''}
+                
+                <div class="detail-section">
+                    <h3>Zugangsdetails</h3>
+                    <div class="access-steps">
+                        ${details.accessSteps.map((step, index) => `
+                            <div class="access-step">
+                                <div class="step-number">${index + 1}</div>
+                                <div class="step-content">
+                                    <h4>${step.title}</h4>
+                                    <p>${step.text}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                ${tool.availability ? `
+                    <div class="detail-section">
+                        <h3>Verfügbarkeit</h3>
+                        <p><strong>${tool.availability}</strong></p>
+                        <p>Bitte kontaktieren Sie das IT-Support-Team für eine Lizenzanfrage.</p>
+                    </div>
+                ` : ''}
+                
+                ${tool.url ? `
+                    <div class="detail-section" style="text-align: center;">
+                        <a href="${tool.url}" target="_blank" class="link-button">
+                            Zum Tool-Login
+                        </a>
+                    </div>
+                ` : ''}
+            `;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Navigation back functions
+        function goToHome() {
+            document.getElementById('tools-page').classList.remove('active');
+            document.getElementById('detail-page').classList.remove('active');
+            document.getElementById('home-page').classList.add('active');
+            currentCategory = null;
+            currentTool = null;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goToToolsList() {
+            document.getElementById('detail-page').classList.remove('active');
+            document.getElementById('tools-page').classList.add('active');
+            currentTool = null;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize animations
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
