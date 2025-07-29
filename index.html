@@ -19,6 +19,7 @@
             --warning: #f59e0b;
             --info: #3b82f6;
             --recommended: #ec4899;
+            --hardware: #14b8a6;
             --dark: #1f2937;
             --light: #f9fafb;
             --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -209,6 +210,7 @@
         .category-badge.request { background: var(--warning); }
         .category-badge.free { background: var(--info); }
         .category-badge.recommended { background: var(--recommended); }
+        .category-badge.hardware { background: var(--hardware); }
 
         .result-icon {
             font-size: 2.5em;
@@ -337,6 +339,11 @@
         .category-card.recommended .category-icon { 
             background: linear-gradient(135deg, #fce7f3, #f9a8d4);
             color: var(--recommended);
+        }
+
+        .category-card.hardware .category-icon { 
+            background: linear-gradient(135deg, #99f6e4, #5eead4);
+            color: var(--hardware);
         }
 
         .category-card h2 {
@@ -516,6 +523,43 @@
 
         .access-icon {
             font-size: 1.2em;
+        }
+
+        /* Link Button */
+        .link-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .link-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .contact-section {
+            background: #f3f4f6;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
         }
 
         /* Tool Detail Page */
@@ -734,6 +778,12 @@
                         <div class="category-icon">⭐</div>
                         <h2>Empfehlenswerte Angebote</h2>
                         <p>Weitere nützliche Tools für den Unterricht</p>
+                    </div>
+
+                    <div class="category-card hardware" onclick="showToolsList('hardware')">
+                        <div class="category-icon">🛠️</div>
+                        <h2>Hardware & Geräte</h2>
+                        <p>Ausleihbare Technologie für innovative Projekte</p>
                     </div>
                 </div>
             </div>
@@ -1177,6 +1227,147 @@
                         }
                     }
                 ]
+            },
+            hardware: {
+                title: 'Hardware & Geräte',
+                description: 'Technische Geräte für innovative Lehr- und Lernprojekte',
+                tools: [
+                    {
+                        id: 'podcast-studio',
+                        name: 'Mobiles Podcaststudio',
+                        icon: '🎙️',
+                        functions: ['Audio-Aufnahme', 'Podcast-Produktion', 'Interview', 'Multimedia'],
+                        description: 'Professionelles Audio-Equipment für Podcasts und Aufnahmen',
+                        access: {
+                            lp: 'Buchung über Medienzentrum',
+                            students: 'Mit Lehrperson'
+                        },
+                        availability: '1 komplettes Set',
+                        details: {
+                            overview: 'Das mobile Podcaststudio ermöglicht professionelle Audio-Aufnahmen für Unterrichtsprojekte, Interviews und Podcast-Produktionen.',
+                            features: [
+                                'Professionelles Mischpult',
+                                '4 hochwertige Mikrofone',
+                                'Kopfhörer für alle Teilnehmenden',
+                                'Mobile Aufnahmeeinheit',
+                                'Zubehör (Kabel, Stative, Pop-Schutz)'
+                            ],
+                            accessSteps: [
+                                { title: 'Reservierung', text: 'Anfrage beim Medienzentrum mindestens 1 Woche im Voraus' },
+                                { title: 'Einführung', text: 'Kurze Einweisung bei Erstnutzung inklusive' },
+                                { title: 'Ausleihdauer', text: 'Maximal 2 Wochen, Verlängerung nach Absprache möglich' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'vr-brillen',
+                        name: 'VR-Brillen',
+                        icon: '🥽',
+                        functions: ['Virtual Reality', 'Immersives Lernen', 'Sport', 'Projektunterricht'],
+                        description: 'Virtual Reality für Sport und Projektunterricht',
+                        access: {
+                            lp: 'Buchung über IT-Support',
+                            students: 'Im Klassenverband'
+                        },
+                        availability: 'Ca. 10 VR-Brillen',
+                        details: {
+                            overview: 'Die VR-Brillen ermöglichen immersive Lernerfahrungen und innovative Anwendungen im Sport- und Projektunterricht.',
+                            features: [
+                                'Meta Quest VR-Brillen',
+                                'Vorinstallierte Bildungs-Apps',
+                                'Sport- und Fitness-Anwendungen',
+                                'Virtuelle Exkursionen',
+                                'Kreative VR-Projekte möglich'
+                            ],
+                            accessSteps: [
+                                { title: 'Buchung', text: 'Reservierung über IT-Support mit Angabe des Verwendungszwecks' },
+                                { title: 'Sicherheit', text: 'Einweisung in sichere Nutzung erforderlich' },
+                                { title: 'Klassensätze', text: 'Ausleihe als Klassensatz für Projekte möglich' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'zoom-kamera',
+                        name: 'Zoom-Konferenzkamera',
+                        icon: '📹',
+                        functions: ['Videokonferenz', 'Remote-Unterricht', 'Hybrid-Events', 'Streaming'],
+                        description: 'Professionelle Kamera für Remote-Sitzungen',
+                        access: {
+                            lp: 'Buchung über IT-Support',
+                            students: 'Nicht direkt'
+                        },
+                        availability: '1 Gerät',
+                        details: {
+                            overview: 'Die professionelle Zoom-Konferenzkamera ermöglicht hochwertige Video-Übertragungen für Remote-Unterricht und Hybrid-Veranstaltungen.',
+                            features: [
+                                'Automatische Sprecherverfolgung',
+                                '4K-Videoqualität',
+                                '360-Grad-Erfassung möglich',
+                                'Plug-and-Play USB-Anschluss',
+                                'Kompatibel mit allen gängigen Konferenz-Tools'
+                            ],
+                            accessSteps: [
+                                { title: 'Reservierung', text: 'Anfrage beim IT-Support mit gewünschtem Nutzungszeitraum' },
+                                { title: 'Setup', text: 'IT-Support unterstützt bei der Ersteinrichtung' },
+                                { title: 'Nutzung', text: 'Ideal für Konferenzen, Gastvorträge und Hybrid-Unterricht' }
+                            ]
+                        }
+                    },
+                    {
+                        id: '3d-drucker',
+                        name: '3D-Drucker',
+                        icon: '🖨️',
+                        functions: ['3D-Druck', 'Prototyping', 'MINT-Projekte', 'Design'],
+                        description: 'Additive Fertigung für Unterrichtsprojekte',
+                        access: {
+                            lp: 'Nach Einführungskurs',
+                            students: 'Mit Betreuung'
+                        },
+                        availability: 'Mehrere Geräte',
+                        details: {
+                            overview: 'Die 3D-Drucker ermöglichen die Umsetzung von Design-Ideen und technischen Projekten im MINT-Bereich.',
+                            features: [
+                                'Verschiedene Druckermodelle',
+                                'PLA und PETG Filamente',
+                                'Druckbereich bis 20x20x20cm',
+                                'Software für 3D-Modellierung vorhanden',
+                                'Nachbearbeitungsstation'
+                            ],
+                            accessSteps: [
+                                { title: 'Einführungskurs', text: 'Pflicht-Workshop für Lehrpersonen vor Erstnutzung' },
+                                { title: 'Projektanmeldung', text: 'Druckprojekte über Online-Formular einreichen' },
+                                { title: 'Material', text: 'Basis-Filamente werden gestellt, Spezialfarben auf Anfrage' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'chatgpt-notebook',
+                        name: 'ChatGPT Pro Notebook',
+                        icon: '💻',
+                        functions: ['KI-Assistenz', 'Fortgeschrittene KI', 'Unterrichtsvorbereitung', 'Projekte'],
+                        description: 'Notebook mit ChatGPT Pro Zugang',
+                        access: {
+                            lp: 'Buchung über IT-Support',
+                            students: 'Nur mit Lehrperson'
+                        },
+                        availability: '1 Gerät',
+                        details: {
+                            overview: 'Ein speziell konfiguriertes Notebook mit vorinstalliertem ChatGPT Pro für fortgeschrittene KI-gestützte Projekte und Unterrichtsvorbereitung.',
+                            features: [
+                                'ChatGPT Pro Account vorinstalliert',
+                                'Zugang zu GPT-4 und erweiterten Funktionen',
+                                'Leistungsstarke Hardware für KI-Anwendungen',
+                                'Zusätzliche KI-Tools vorinstalliert',
+                                'Sichere, schulkonforme Konfiguration'
+                            ],
+                            accessSteps: [
+                                { title: 'Anfrage', text: 'Buchung über IT-Support mit Projektbeschreibung' },
+                                { title: 'Nutzungsdauer', text: 'Tageweise oder wochenweise Ausleihe möglich' },
+                                { title: 'Datenschutz', text: 'Einweisung in datenschutzkonforme Nutzung erforderlich' }
+                            ]
+                        }
+                    }
+                ]
             }
         };
 
@@ -1286,7 +1477,8 @@
                     general: 'Allgemeine Lizenz',
                     request: 'Per Antrag',
                     free: 'Gratis',
-                    recommended: 'Empfohlen'
+                    recommended: 'Empfohlen',
+                    hardware: 'Hardware'
                 };
 
                 card.innerHTML = `
@@ -1380,7 +1572,8 @@
                 general: 'Allgemeine Schullizenz',
                 request: 'Schullizenz per Antrag',
                 free: 'Gratisangebot',
-                recommended: 'Empfehlenswert'
+                recommended: 'Empfehlenswert',
+                hardware: 'Hardware & Geräte'
             };
             
             document.getElementById('detail-icon').textContent = tool.icon;
@@ -1444,7 +1637,7 @@
                     <div class="detail-section">
                         <h3>Verfügbarkeit</h3>
                         <p><strong>${tool.availability}</strong></p>
-                        <p>Bitte kontaktieren Sie das IT-Support-Team für eine Lizenzanfrage.</p>
+                        <p>Bitte kontaktieren Sie ${category === 'hardware' ? 'das Medienzentrum oder den' : 'das'} IT-Support-Team für eine ${category === 'hardware' ? 'Reservierung' : 'Lizenzanfrage'}.</p>
                     </div>
                 ` : ''}
                 
