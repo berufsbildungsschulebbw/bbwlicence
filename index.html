@@ -828,6 +828,36 @@
                 description: 'Diese Tools stehen allen Lehrpersonen und Lernenden zur Verfügung',
                 tools: [
                     {
+                        id: 'olat',
+                        name: 'OLAT',
+                        icon: '🎓',
+                        functions: ['Lernplattform', 'Tests', 'Videoquiz', 'Kollaboration', 'Feedbacksystem'],
+                        description: 'Learning Management System der BBW',
+                        url: 'https://olat.bbw.ch',
+                        access: {
+                            lp: 'Per Schullogin',
+                            students: 'Per Schullogin'
+                        },
+                        details: {
+                            overview: 'OLAT (Online Learning And Training) ist die zentrale Lernplattform der BBW für digitalen Unterricht und E-Learning.',
+                            features: [
+                                'Tests und Prüfungen online erstellen',
+                                'Videoquiz für interaktive Lerninhalte',
+                                'Feedback-basierte Lernpfade',
+                                'Formulare und Umfragen',
+                                'Blogs und Wikis für Kollaboration',
+                                'Integration externer Tools (Padlet, GitHub, LearningApps, etc.)',
+                                'SCORM-Support für Lumi Education und andere',
+                                'Automatische Bewertungen und Notenübersicht'
+                            ],
+                            accessSteps: [
+                                { title: 'Zugang', text: 'Anmeldung mit BBW-Login auf olat.bbw.ch' },
+                                { title: 'Externe Tools', text: 'Einbindung von Padlet, GitHub-HTML-Seiten, LearningApps per iFrame' },
+                                { title: 'Support', text: 'OLAT-Support-Team und Schulungen verfügbar' }
+                            ]
+                        }
+                    },
+                    {
                         id: 'nanoo',
                         name: 'nanoo.tv',
                         icon: '📺',
@@ -959,6 +989,61 @@
                                 { title: 'Zugang', text: 'Automatischer Zugriff über bestehenden Fobizz-Account' },
                                 { title: 'Aktivierung', text: 'In Fobizz unter "Verbundene Apps" aktivieren' },
                                 { title: 'Hinweis', text: 'Ausschließlich für Lehrpersonen - kein direkter Schülerzugang' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'findmind',
+                        name: 'findmind.ch',
+                        icon: '🧩',
+                        functions: ['Mindmapping', 'Kollaboration', 'Visualisierung', 'Projektplanung'],
+                        description: 'Online-Mindmapping-Tool',
+                        url: 'https://findmind.ch',
+                        access: {
+                            lp: 'Einzellizenz verfügbar',
+                            students: 'Über Team-Konti möglich'
+                        },
+                        availability: '1 Einzellizenz',
+                        details: {
+                            overview: 'findmind.ch ist ein schweizer Online-Tool für kollaboratives Mindmapping und visuelle Projektplanung.',
+                            features: [
+                                'Intuitive Mindmap-Erstellung',
+                                'Echtzeit-Kollaboration',
+                                'Export in verschiedene Formate',
+                                'Vorlagen für Unterricht',
+                                'Team-Konti für Klassen möglich'
+                            ],
+                            accessSteps: [
+                                { title: 'Einzellizenz', text: 'Eine Schullizenz verfügbar - Anfrage beim IT-Support' },
+                                { title: 'Team-Konti', text: 'Lehrperson kann Team-Konti erstellen, die einzeln von Lernenden genutzt werden' },
+                                { title: 'Tipp', text: 'Ideal für Projektarbeiten und Brainstorming-Sessions' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'chatgpt-edu',
+                        name: 'ChatGPT Plus',
+                        icon: '🤖',
+                        functions: ['KI-Assistenz', 'Textgenerierung', 'Programmierung', 'Recherche'],
+                        description: 'Fortgeschrittene KI-Assistenz',
+                        access: {
+                            lp: 'Notebook in Lernlounge',
+                            students: 'Notebook in Lernlounge'
+                        },
+                        availability: '1 Einzelabo auf Notebook',
+                        details: {
+                            overview: 'ChatGPT Plus bietet erweiterten Zugang zu GPT-4 und zusätzlichen Funktionen für fortgeschrittene KI-Assistenz.',
+                            features: [
+                                'GPT-4 Zugang',
+                                'Bildgenerierung mit DALL-E',
+                                'Code Interpreter',
+                                'Erweiterte Plugins',
+                                'Schnellere Antwortzeiten'
+                            ],
+                            accessSteps: [
+                                { title: 'Zugang', text: 'Einzelabo auf speziellem Notebook installiert' },
+                                { title: 'Ausleihe', text: 'Notebook kann in der Lernlounge ausgeliehen werden' },
+                                { title: 'Reservierung', text: 'Empfohlen: Vorab bei der Lernlounge reservieren' }
                             ]
                         }
                     },
@@ -1140,29 +1225,87 @@
                 description: 'Kostenlose Tools für den Bildungsbereich',
                 tools: [
                     {
-                        id: 'h5p',
-                        name: 'H5P',
+                        id: 'lumiedu',
+                        name: 'Lumi Education',
                         icon: '🎮',
-                        functions: ['Interaktive Inhalte', 'Quizze', 'Videos', 'Präsentationen'],
-                        description: 'Open-Source für interaktive Inhalte',
-                        url: 'https://h5p.org',
+                        functions: ['Interaktive Inhalte', 'H5P-Editor', 'Offline-Nutzung', 'SCORM-Export'],
+                        description: 'Desktop-App für H5P-Inhalte',
+                        url: 'https://lumi.education',
                         access: {
-                            lp: 'In OLAT integriert',
-                            students: 'Über Kursinhalte'
+                            lp: 'Kostenloser Download',
+                            students: 'Kostenloser Download'
                         },
                         details: {
-                            overview: 'H5P ist ein Open-Source-Framework zur Erstellung interaktiver HTML5-Inhalte direkt in OLAT.',
+                            overview: 'Lumi Education ist eine kostenlose Desktop-Anwendung zur Erstellung und Bearbeitung von H5P-Inhalten ohne Online-Plattform.',
                             features: [
-                                'Über 40 verschiedene Inhaltstypen',
-                                'Interaktive Videos mit Quizfragen',
-                                'Drag-and-Drop Aufgaben',
-                                'Zeitstrahlen und Präsentationen',
-                                'Direkte OLAT-Integration'
+                                'Offline H5P-Editor',
+                                'Über 40 Inhaltstypen',
+                                'SCORM-Export für OLAT',
+                                'HTML-Export für Websites',
+                                'Keine Registrierung nötig',
+                                'Plattformunabhängig (Windows, Mac, Linux)'
                             ],
                             accessSteps: [
-                                { title: 'Für Lehrpersonen', text: 'In OLAT unter "Kursbaustein hinzufügen" → "H5P" verfügbar' },
-                                { title: 'Inhalte erstellen', text: 'Direkt im OLAT-Editor ohne zusätzliche Software' },
-                                { title: 'Für Lernende', text: 'Automatischer Zugriff über OLAT-Kurse' }
+                                { title: 'Download', text: 'Kostenloser Download von lumi.education' },
+                                { title: 'Installation', text: 'Einfache Installation ohne Admin-Rechte möglich' },
+                                { title: 'OLAT-Integration', text: 'Exportierte SCORM-Pakete direkt in OLAT hochladen' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'learningapps',
+                        name: 'LearningApps.org',
+                        icon: '🎲',
+                        functions: ['Interaktive Übungen', 'Quiz-Erstellung', 'Multimedia', 'Gamification'],
+                        description: 'Plattform für interaktive Lernbausteine',
+                        url: 'https://learningapps.org',
+                        access: {
+                            lp: 'Kostenlose Registrierung',
+                            students: 'Ohne Registrierung nutzbar'
+                        },
+                        details: {
+                            overview: 'LearningApps.org ist eine kostenlose Web-Plattform zur Erstellung multimedialer Lernbausteine für den Unterricht.',
+                            features: [
+                                'Über 20 verschiedene App-Vorlagen',
+                                'Kreuzworträtsel, Memory, Zuordnungen',
+                                'Audio- und Video-Integration',
+                                'QR-Codes für mobilen Zugriff',
+                                'Direkte OLAT-Einbindung möglich',
+                                'Umfangreiche App-Sammlung'
+                            ],
+                            accessSteps: [
+                                { title: 'Lehrpersonen', text: 'Kostenlose Registrierung für eigene App-Erstellung' },
+                                { title: 'Lernende', text: 'Apps ohne Anmeldung über Link oder QR-Code nutzbar' },
+                                { title: 'OLAT-Integration', text: 'Apps per iFrame oder Link in OLAT einbinden' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'simpleshow',
+                        name: 'simpleshow',
+                        icon: '🎬',
+                        functions: ['Erklärvideo', 'Animation', 'Storytelling', 'KI-Unterstützung'],
+                        description: 'Erklärvideo-Erstellung',
+                        url: 'https://simpleshow.com',
+                        access: {
+                            lp: 'Edu-Abo verfügbar',
+                            students: 'Mit Lehrperson'
+                        },
+                        availability: 'Edu-Abo für Bildung',
+                        details: {
+                            overview: 'simpleshow ist ein Tool zur einfachen Erstellung professioneller Erklärvideos mit KI-Unterstützung.',
+                            features: [
+                                'KI-gestützte Skripterstellung',
+                                'Automatische Visualisierung',
+                                'Professionelle Sprecher',
+                                'Verschiedene Stilvorlagen',
+                                'Export in HD-Qualität',
+                                'Edu-Abo mit erweiterten Funktionen'
+                            ],
+                            accessSteps: [
+                                { title: 'Edu-Abo', text: 'Spezielle Konditionen für Bildungseinrichtungen verfügbar' },
+                                { title: 'Kostenlose Basis', text: 'Eingeschränkte Gratisversion zum Testen' },
+                                { title: 'Klassenprojekte', text: 'Ideal für Präsentationen und Referate' }
                             ]
                         }
                     },
@@ -1197,7 +1340,7 @@
             },
             recommended: {
                 title: 'Empfehlenswerte Angebote',
-                description: 'Weitere nützliche Tools für innovative Lehrmethoden',
+                description: 'Diese Tools werden nicht durch die BBW finanziert, bieten aber Gratisangebote oder eingeschränkte Funktionen für den Unterricht',
                 tools: [
                     {
                         id: 'padlet',
@@ -1223,6 +1366,118 @@
                                 { title: 'Kostenlose Version', text: '3 Padlets gleichzeitig in der Gratisversion' },
                                 { title: 'Lehrpersonen', text: 'Registrierung auf padlet.com mit beliebiger Email' },
                                 { title: 'Lernende', text: 'Kein Account nötig - Zugriff über geteilten Link' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'mentimeter',
+                        name: 'Mentimeter',
+                        icon: '📊',
+                        functions: ['Live-Umfragen', 'Interaktive Präsentationen', 'Quiz', 'Wordclouds'],
+                        description: 'Interaktive Präsentationen',
+                        url: 'https://www.mentimeter.com',
+                        access: {
+                            lp: 'Gratis-Account (2 Fragen/Präsentation)',
+                            students: 'Per Code/QR'
+                        },
+                        details: {
+                            overview: 'Mentimeter macht Präsentationen interaktiv mit Live-Umfragen, Quiz und Echtzeit-Feedback.',
+                            features: [
+                                'Live-Abstimmungen',
+                                'Wordclouds in Echtzeit',
+                                'Quiz mit Ranglisten',
+                                'Q&A-Sessions',
+                                'Anonyme Teilnahme möglich',
+                                'Export der Ergebnisse'
+                            ],
+                            accessSteps: [
+                                { title: 'Gratisversion', text: 'Bis zu 2 Fragen pro Präsentation kostenlos' },
+                                { title: 'Lehrpersonen', text: 'Kostenlose Registrierung auf mentimeter.com' },
+                                { title: 'Lernende', text: 'Teilnahme über menti.com mit Code oder QR-Scan' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'lechat',
+                        name: 'Le Chat (Mistral)',
+                        icon: '🗨️',
+                        functions: ['KI-Chat', 'Markdown-Erstellung', 'Textgenerierung', 'Programmierung'],
+                        description: 'KI-Assistent für Markdown und mehr',
+                        url: 'https://chat.mistral.ai',
+                        access: {
+                            lp: 'Kostenlose Registrierung',
+                            students: 'Kostenlose Registrierung'
+                        },
+                        details: {
+                            overview: 'Le Chat von Mistral AI ist ein leistungsstarker KI-Assistent, besonders geeignet für technische Aufgaben und Markdown-Erstellung.',
+                            features: [
+                                'Spezialisiert auf Markdown-Formatierung',
+                                'Code-Generierung und -Erklärung',
+                                'Mehrsprachige Unterstützung',
+                                'Technische Dokumentation',
+                                'LaTeX-Unterstützung',
+                                'Kostenlose Basisversion'
+                            ],
+                            accessSteps: [
+                                { title: 'Registrierung', text: 'Kostenlose Anmeldung auf chat.mistral.ai' },
+                                { title: 'Nutzung', text: 'Ideal für technische Dokumentation und Markdown' },
+                                { title: 'Tipp', text: 'Besonders gut für MINT-Fächer und Programmierung' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'claude',
+                        name: 'Claude (Anthropic)',
+                        icon: '🤖',
+                        functions: ['KI-Assistenz', 'Artefakte erstellen', 'Analyse', 'Kreatives Schreiben'],
+                        description: 'KI für komplexe Aufgaben und Artefakte',
+                        url: 'https://claude.ai',
+                        access: {
+                            lp: 'Kostenlose Basisversion',
+                            students: 'Kostenlose Basisversion'
+                        },
+                        details: {
+                            overview: 'Claude von Anthropic ist ein fortschrittlicher KI-Assistent mit der einzigartigen Fähigkeit, interaktive Artefakte zu erstellen.',
+                            features: [
+                                'Erstellung von HTML/CSS/JS-Artefakten',
+                                'Interaktive Visualisierungen',
+                                'Komplexe Analysen',
+                                'Kreatives Schreiben',
+                                'Ethische KI-Prinzipien',
+                                'Lange Kontextfenster'
+                            ],
+                            accessSteps: [
+                                { title: 'Zugang', text: 'Kostenlose Version auf claude.ai verfügbar' },
+                                { title: 'Artefakte', text: 'Kann funktionierende Web-Apps und Visualisierungen erstellen' },
+                                { title: 'GitHub-Integration', text: 'Erstellte Artefakte können über GitHub gehostet werden' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'github',
+                        name: 'GitHub',
+                        icon: '🐙',
+                        functions: ['Code-Hosting', 'Versionskontrolle', 'Kollaboration', 'GitHub Pages'],
+                        description: 'Code-Plattform mit Hosting-Möglichkeiten',
+                        url: 'https://github.com',
+                        access: {
+                            lp: 'BBW ist registriert',
+                            students: 'Kostenlose Registrierung'
+                        },
+                        details: {
+                            overview: 'GitHub ist die führende Plattform für Code-Hosting und Kollaboration. Die BBW ist registriert, was erweiterte Möglichkeiten bietet.',
+                            features: [
+                                'Unbegrenzte öffentliche Repositories',
+                                'GitHub Pages für HTML-Hosting',
+                                'Integration in OLAT möglich',
+                                'Versionskontrolle für Projekte',
+                                'GitHub Education Benefits',
+                                'Actions für Automatisierung'
+                            ],
+                            accessSteps: [
+                                { title: 'BBW-Organisation', text: 'Die BBW ist als Organisation registriert' },
+                                { title: 'HTML in OLAT', text: 'GitHub Pages URLs können direkt in OLAT eingebunden werden' },
+                                { title: 'Artefakte hosten', text: 'Claude/KI-generierte HTML-Artefakte online stellen' }
                             ]
                         }
                     }
