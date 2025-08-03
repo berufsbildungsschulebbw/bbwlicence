@@ -211,6 +211,7 @@
         .category-badge.free { background: var(--info); }
         .category-badge.recommended { background: var(--recommended); }
         .category-badge.hardware { background: var(--hardware); }
+        .category-badge.process { background: var(--warning); }
 
         .result-icon {
             font-size: 2.5em;
@@ -344,6 +345,11 @@
         .category-card.hardware .category-icon { 
             background: linear-gradient(135deg, #99f6e4, #5eead4);
             color: var(--hardware);
+        }
+
+        .category-card.process .category-icon { 
+            background: linear-gradient(135deg, #fed7aa, #fb923c);
+            color: var(--warning);
         }
 
         .category-card h2 {
@@ -742,6 +748,9 @@
 
                 <!-- Filter by Functions -->
                 <div id="filter-content" class="filter-content">
+                    <div style="margin-bottom: 20px;">
+                        <input type="text" id="search-field" placeholder="Tool suchen..." style="width: 100%; padding: 12px 20px; border: 2px solid #e5e7eb; border-radius: 25px; font-size: 1em; outline: none; transition: border-color 0.3s;" onkeyup="performSearch()">
+                    </div>
                     <div class="function-filters" id="function-filters">
                         <!-- Dynamically populated -->
                     </div>
@@ -784,6 +793,12 @@
                         <div class="category-icon">🛠️</div>
                         <h2>Hardware & Geräte</h2>
                         <p>Ausleihbare Technologie für innovative Projekte</p>
+                    </div>
+
+                    <div class="category-card request" onclick="showToolsList('process')">
+                        <div class="category-icon">📝</div>
+                        <h2>Fehlende Lizenzen & Vorgehen Beschaffung</h2>
+                        <p>Prozess für neue Tool-Anfragen</p>
                     </div>
                 </div>
             </div>
@@ -942,20 +957,22 @@
                         id: 'fobizz',
                         name: 'Fobizz',
                         icon: '🤖',
-                        functions: ['KI-Assistenz', 'Unterrichtsmaterial', 'Fortbildung', 'Kollaboration'],
-                        description: 'KI-gestützte Unterrichtsplattform',
+                        functions: ['KI-Assistenz', 'KI-Chatbot', 'Textgenerierung', 'Unterrichtsmaterial', 'Fortbildung', 'Kollaboration'],
+                        description: 'KI-gestützte Unterrichtsplattform mit Multiple LLMs',
                         url: 'https://fobizz.com',
                         access: {
                             lp: 'Per Schullizenz-Link',
                             students: 'Code pro Lernende'
                         },
                         details: {
-                            overview: 'Fobizz ist eine KI-gestützte Plattform für Lehrkräfte zur digitalen Unterrichtsgestaltung und Fortbildung.',
+                            overview: 'Fobizz ist eine KI-gestützte Plattform für Lehrkräfte zur digitalen Unterrichtsgestaltung. Als KI-Chatbot stehen verschiedene große Sprachmodelle wie Claude, ChatGPT, Mistral und weitere zur Verfügung.',
                             features: [
+                                'Multiple KI-Modelle (Claude, ChatGPT, Mistral, etc.)',
                                 'KI-Assistent für Unterrichtsmaterial',
                                 'Automatische Arbeitsblatt-Generierung',
                                 'Differenzierte Aufgaben erstellen',
                                 'KI-Bildgenerierung',
+                                'Textgenerierung mit verschiedenen Modellen',
                                 'Fortbildungskurse'
                             ],
                             accessSteps: [
@@ -1017,33 +1034,6 @@
                                 { title: 'Einzellizenz', text: 'Eine Schullizenz verfügbar - Anfrage beim IT-Support' },
                                 { title: 'Team-Konti', text: 'Lehrperson kann Team-Konti erstellen, die einzeln von Lernenden genutzt werden' },
                                 { title: 'Tipp', text: 'Ideal für Projektarbeiten und Brainstorming-Sessions' }
-                            ]
-                        }
-                    },
-                    {
-                        id: 'chatgpt-edu',
-                        name: 'ChatGPT Plus',
-                        icon: '🤖',
-                        functions: ['KI-Assistenz', 'Textgenerierung', 'Programmierung', 'Recherche'],
-                        description: 'Fortgeschrittene KI-Assistenz',
-                        access: {
-                            lp: 'Notebook in Lernlounge',
-                            students: 'Notebook in Lernlounge'
-                        },
-                        availability: '1 Einzelabo auf Notebook',
-                        details: {
-                            overview: 'ChatGPT Plus bietet erweiterten Zugang zu GPT-4 und zusätzlichen Funktionen für fortgeschrittene KI-Assistenz.',
-                            features: [
-                                'GPT-4 Zugang',
-                                'Bildgenerierung mit DALL-E',
-                                'Code Interpreter',
-                                'Erweiterte Plugins',
-                                'Schnellere Antwortzeiten'
-                            ],
-                            accessSteps: [
-                                { title: 'Zugang', text: 'Einzelabo auf speziellem Notebook installiert' },
-                                { title: 'Ausleihe', text: 'Notebook kann in der Lernlounge ausgeliehen werden' },
-                                { title: 'Reservierung', text: 'Empfohlen: Vorab bei der Lernlounge reservieren' }
                             ]
                         }
                     },
@@ -1125,6 +1115,156 @@
                                 { title: 'Campus-Zugang', text: 'Automatischer Zugriff im BBW-Netzwerk oder per VPN' },
                                 { title: 'Persönlicher Account', text: 'Kostenlose Registrierung mit BBW-Email für Download-Funktionen' },
                                 { title: 'Nutzungshinweis', text: 'Quellenangabe bei Verwendung in Arbeiten erforderlich' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'clipchamp',
+                        name: 'Clipchamp',
+                        icon: '🎬',
+                        functions: ['Videobearbeitung', 'Screenrecording', 'KI-Features', 'Export'],
+                        description: 'Microsoft Video-Editor',
+                        url: 'https://clipchamp.com',
+                        access: {
+                            lp: 'Über M365-Account',
+                            students: 'Über M365-Account'
+                        },
+                        details: {
+                            overview: 'Clipchamp ist Microsofts integrierter Video-Editor, der über Microsoft 365 für alle BBW-Angehörigen verfügbar ist.',
+                            features: [
+                                'Intuitive Videobearbeitung im Browser',
+                                'Bildschirmaufnahme und Webcam-Recording',
+                                'KI-gestützte Untertitel',
+                                'Vorlagen für verschiedene Formate',
+                                'Text-to-Speech in mehreren Sprachen',
+                                'Direkter Export zu OneDrive/SharePoint'
+                            ],
+                            accessSteps: [
+                                { title: 'Zugang', text: 'Automatisch über Microsoft 365 Account verfügbar' },
+                                { title: 'Start', text: 'Über app.clipchamp.com oder aus Office.com' },
+                                { title: 'Integration', text: 'Nahtlose Integration mit OneDrive und Teams' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'pdfannotator',
+                        name: 'PDF Annotator',
+                        icon: '📝',
+                        functions: ['PDF-Bearbeitung', 'Annotationen', 'Handschrift', 'Kollaboration'],
+                        description: 'PDF-Bearbeitungssoftware',
+                        url: 'https://www.pdfannotator.com',
+                        access: {
+                            lp: 'Per Schullizenz',
+                            students: 'Per Schullizenz'
+                        },
+                        details: {
+                            overview: 'PDF Annotator ist eine professionelle Software zur Bearbeitung und Kommentierung von PDF-Dokumenten mit Fokus auf digitale Handschrift.',
+                            features: [
+                                'Handschriftliche Notizen auf PDFs',
+                                'Textmarkierungen und Kommentare',
+                                'Formen und Freihandzeichnungen',
+                                'Stempel und vordefinierte Anmerkungen',
+                                'Export mit oder ohne Annotationen',
+                                'Ideal für Tablet-PCs und Touchscreens'
+                            ],
+                            accessSteps: [
+                                { title: 'Installation', text: 'Software über IT-Portal herunterladen' },
+                                { title: 'Lizenzierung', text: 'Automatische Aktivierung im Schulnetzwerk' },
+                                { title: 'Support', text: 'Anleitungen und Tipps im BBW-Wiki verfügbar' }
+                            ]
+                        }
+                    }
+                ]
+            },
+            process: {
+                title: 'Fehlende Lizenzen & Vorgehen bei der Beschaffung',
+                description: 'Strukturierter Prozess für die Anfrage und Bewertung neuer digitaler Tools',
+                tools: [
+                    {
+                        id: 'license-process',
+                        name: 'Beschaffungsprozess für neue Tools',
+                        icon: '🔄',
+                        functions: ['Anfrageprozess', 'Evaluation', 'Entscheidung', 'Alternativen'],
+                        description: 'Schritt-für-Schritt Vorgehen bei Tool-Wünschen',
+                        access: {
+                            lp: 'Über PIKT-Team',
+                            students: 'Nicht anwendbar'
+                        },
+                        details: {
+                            overview: 'Die BBW folgt einem strukturierten Prozess bei der Evaluierung und Beschaffung neuer digitaler Tools, um eine nachhaltige und sinnvolle Nutzung der Ressourcen sicherzustellen.',
+                            features: [
+                                'Strukturierte Bedarfsanalyse',
+                                'Prüfung bestehender Alternativen',
+                                'Finanzielle Machbarkeitsprüfung',
+                                'Pädagogische Bewertung',
+                                'Datenschutz-Compliance',
+                                'Support und Schulungsplanung'
+                            ],
+                            accessSteps: [
+                                { title: '1. Anfrage stellen', text: 'Wunsch für neues Tool an das PIKT-Team richten mit Begründung des pädagogischen Mehrwerts' },
+                                { title: '2. Prüfung Alternativen', text: 'PIKT-Team prüft, ob bereits eine Lizenz für ein Tool mit gleichen Funktionen vorhanden ist' },
+                                { title: '3. Machbarkeitsanalyse', text: 'Falls keine Alternative vorhanden: Prüfung ob Anschaffung als Schullizenz oder in begrenztem Umfang finanzierbar ist' },
+                                { title: '4. Entscheidung Steuergruppe', text: 'Bei positivem Vorentscheid: Definitive Entscheidung durch PIKT-Steuergruppe und Information der Schulleitung' },
+                                { title: '5a. Bei Zusage', text: 'Beschaffung, Einrichtung und Schulungsplanung durch IT-Support und PIKT-Team' },
+                                { title: '5b. Bei Ablehnung', text: 'PIKT-Team schlägt Alternativen vor und unterstützt bei der Umsetzung mit bestehenden Tools' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'contact-pikt',
+                        name: 'Kontakt PIKT-Team',
+                        icon: '📧',
+                        functions: ['Beratung', 'Support', 'Schulungen', 'Innovation'],
+                        description: 'Ihre Ansprechpartner für digitale Bildung',
+                        access: {
+                            lp: 'Direkte Kontaktaufnahme',
+                            students: 'Nicht direkt'
+                        },
+                        details: {
+                            overview: 'Das PIKT-Team (Pädagogische ICT-Koordination) unterstützt Lehrpersonen bei der Integration digitaler Medien in den Unterricht.',
+                            features: [
+                                'Beratung zu digitalen Tools',
+                                'Unterstützung bei Unterrichtsprojekten',
+                                'Schulungen und Workshops',
+                                'Evaluation neuer Technologien',
+                                'Best Practice Sharing',
+                                'Technisch-pädagogischer Support'
+                            ],
+                            accessSteps: [
+                                { title: 'E-Mail', text: 'pikt@bbw.ch für allgemeine Anfragen' },
+                                { title: 'Teams', text: 'PIKT-Team Channel für schnelle Fragen' },
+                                { title: 'Sprechstunden', text: 'Wöchentliche offene Sprechstunden (Termine im Intranet)' },
+                                { title: 'SharePoint', text: 'PIKT-Ressourcen und Anleitungen im BBW SharePoint' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'evaluation-criteria',
+                        name: 'Bewertungskriterien',
+                        icon: '✅',
+                        functions: ['Qualitätssicherung', 'Standards', 'Anforderungen', 'Checkliste'],
+                        description: 'Kriterien für die Tool-Evaluation',
+                        access: {
+                            lp: 'Einsehbar für alle LP',
+                            students: 'Nicht relevant'
+                        },
+                        details: {
+                            overview: 'Die BBW bewertet neue Tools nach klaren Kriterien, um Qualität, Nachhaltigkeit und pädagogischen Nutzen sicherzustellen.',
+                            features: [
+                                'Pädagogischer Mehrwert',
+                                'Benutzerfreundlichkeit',
+                                'Datenschutz & Sicherheit',
+                                'Kosten-Nutzen-Verhältnis',
+                                'Technische Kompatibilität',
+                                'Support & Dokumentation',
+                                'Skalierbarkeit',
+                                'Barrierefreiheit'
+                            ],
+                            accessSteps: [
+                                { title: 'Pädagogik first', text: 'Tool muss klaren Mehrwert für Lehren und Lernen bieten' },
+                                { title: 'Datenschutz', text: 'Compliance mit Schweizer Datenschutzrichtlinien zwingend' },
+                                { title: 'Integration', text: 'Möglichkeit zur Integration in bestehende Systeme (OLAT, M365)' },
+                                { title: 'Nachhaltigkeit', text: 'Langfristige Verfügbarkeit und Entwicklung des Anbieters' }
                             ]
                         }
                     }
@@ -1215,6 +1355,35 @@
                                 { title: 'Lizenzanfrage', text: 'Nur 2 Lizenzen verfügbar - frühzeitig anfragen' },
                                 { title: 'Lehrpersonen', text: 'Registrierung über bereitgestellten Link' },
                                 { title: 'Lernende', text: 'Einladung zum Kurs per E-Mail von der Lehrperson' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'synthesia',
+                        name: 'Synthesia',
+                        icon: '🎭',
+                        functions: ['KI-Videos', 'Avatar-Präsentation', 'Mehrsprachigkeit', 'Videoerstellung'],
+                        description: 'KI-gestützte Videoerstellung mit Avataren',
+                        url: 'https://www.synthesia.io',
+                        access: {
+                            lp: 'Per Anfrage zum Testen',
+                            students: 'Nicht direkt'
+                        },
+                        availability: '1 Einzellizenz',
+                        details: {
+                            overview: 'Synthesia ermöglicht die Erstellung professioneller Videos mit KI-generierten Avataren ohne Kamera oder Mikrofon.',
+                            features: [
+                                'Über 140 KI-Avatare',
+                                'Text-zu-Video in 120+ Sprachen',
+                                'Professionelle Videovorlagen',
+                                'Eigene Avatare erstellbar',
+                                'Untertitel automatisch generiert',
+                                'MP4-Export in Full HD'
+                            ],
+                            accessSteps: [
+                                { title: 'Testanfrage', text: 'Einzellizenz kann per Anfrage beim IT-Support ausprobiert werden' },
+                                { title: 'Nutzungsdauer', text: 'Testweise Nutzung nach Absprache' },
+                                { title: 'Einsatzgebiete', text: 'Ideal für Erklärvideos, Präsentationen und mehrsprachige Inhalte' }
                             ]
                         }
                     }
@@ -1480,6 +1649,91 @@
                                 { title: 'Artefakte hosten', text: 'Claude/KI-generierte HTML-Artefakte online stellen' }
                             ]
                         }
+                    },
+                    {
+                        id: 'landbot',
+                        name: 'Landbot.io',
+                        icon: '💬',
+                        functions: ['Chatbot-Erstellung', 'Dialogbasiertes Lernen', 'Interaktive Flows', 'No-Code'],
+                        description: 'Chatbot ohne KI für Lernprozesse',
+                        url: 'https://landbot.io',
+                        access: {
+                            lp: 'Gratisangebot + BBW-Einzellizenz',
+                            students: 'Per Bot-Link'
+                        },
+                        availability: '1 BBW-Einzellizenz',
+                        details: {
+                            overview: 'Landbot.io ermöglicht die Erstellung von dialogbasierten Lernprozessen ohne KI durch visuelle Chatbot-Flows.',
+                            features: [
+                                'Drag-and-Drop Bot-Builder',
+                                'Verzweigte Dialogpfade',
+                                'Multimedia-Integration',
+                                'Quiz und Umfragen',
+                                'Lernfortschritt-Tracking',
+                                'Export der Gesprächsdaten'
+                            ],
+                            accessSteps: [
+                                { title: 'Gratisversion', text: 'Basis-Funktionen kostenlos nutzbar' },
+                                { title: 'BBW-Einzellizenz', text: 'PIKT-Team hilft bei größeren Bot-Projekten' },
+                                { title: 'Freischaltung', text: 'Größere Bots können über BBW-Lizenz freigeschaltet werden' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'prezi',
+                        name: 'Prezi',
+                        icon: '🎯',
+                        functions: ['Präsentationen', 'KI-Integration', 'Infografiken', 'Zoom-Effekte'],
+                        description: 'Dynamische Präsentationen mit KI',
+                        url: 'https://prezi.com',
+                        access: {
+                            lp: 'Gratisangebot verfügbar',
+                            students: 'Gratisangebot verfügbar'
+                        },
+                        details: {
+                            overview: 'Prezi revolutioniert Präsentationen durch nicht-lineare Darstellung, Zoom-Effekte und smarte KI-Integration.',
+                            features: [
+                                'Nicht-lineare Präsentationsstruktur',
+                                'KI-gestützte Design-Vorschläge',
+                                'Dynamische Zoom-Effekte',
+                                'Interaktive Infografiken',
+                                'Video-Integration',
+                                'Kollaborative Bearbeitung'
+                            ],
+                            accessSteps: [
+                                { title: 'Gratisversion', text: 'Grundfunktionen kostenlos mit Prezi-Branding' },
+                                { title: 'Edu-Angebote', text: 'Spezielle Konditionen für Bildung verfügbar' },
+                                { title: 'Tipp', text: 'Ideal für visuell ansprechende, dynamische Präsentationen' }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'chatgpt',
+                        name: 'ChatGPT',
+                        icon: '🤖',
+                        functions: ['KI-Assistenz', 'Textgenerierung', 'Programmierung', 'Recherche'],
+                        description: 'Fortgeschrittene KI-Assistenz',
+                        url: 'https://chat.openai.com',
+                        access: {
+                            lp: 'Gratisversion verfügbar',
+                            students: 'Gratisversion verfügbar'
+                        },
+                        details: {
+                            overview: 'ChatGPT ist ein leistungsstarker KI-Assistent von OpenAI. Eine Gratisversion ist verfügbar, aber es ist empfehlenswert, die kostenpflichtige Plus-Version für einen Monat auf eigene Kosten zu testen.',
+                            features: [
+                                'Gratisversion mit GPT-3.5',
+                                'Plus-Version: GPT-4 Zugang',
+                                'Plus: Bildgenerierung mit DALL-E',
+                                'Plus: Code Interpreter',
+                                'Plus: Erweiterte Plugins',
+                                'Plus: Prioritätszugang'
+                            ],
+                            accessSteps: [
+                                { title: 'Kostenlose Nutzung', text: 'Registrierung auf chat.openai.com für Basisversion' },
+                                { title: 'Plus-Version testen', text: 'Empfehlenswert: 1 Monat Plus-Abo (ca. 20 USD) auf eigene Kosten testen' },
+                                { title: 'Vorteile Plus', text: 'Deutlich leistungsfähiger, mehr Features und stabilere Verfügbarkeit' }
+                            ]
+                        }
                     }
                 ]
             },
@@ -1630,6 +1884,7 @@
         let currentCategory = null;
         let currentTool = null;
         let activeFilters = new Set();
+        let searchTerm = '';
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
@@ -1684,7 +1939,14 @@
 
         function clearFilters() {
             activeFilters.clear();
+            searchTerm = '';
+            document.getElementById('search-field').value = '';
             updateFilterUI();
+            updateFilteredResults();
+        }
+
+        function performSearch() {
+            searchTerm = document.getElementById('search-field').value.toLowerCase();
             updateFilteredResults();
         }
 
@@ -1702,25 +1964,40 @@
             const resultsContainer = document.getElementById('filtered-results');
             resultsContainer.innerHTML = '';
 
-            if (activeFilters.size === 0) {
-                resultsContainer.innerHTML = '<div class="no-results"><h3>Wählen Sie Funktionen aus</h3><p>Klicken Sie auf die Funktions-Tags oben, um Tools zu filtern.</p></div>';
+            if (activeFilters.size === 0 && searchTerm === '') {
+                resultsContainer.innerHTML = '<div class="no-results"><h3>Tools suchen</h3><p>Verwenden Sie das Suchfeld oder klicken Sie auf die Funktions-Tags oben, um Tools zu finden.</p></div>';
                 return;
             }
 
             let foundTools = [];
             Object.entries(toolsData).forEach(([categoryKey, category]) => {
                 category.tools.forEach(tool => {
-                    const hasMatchingFunction = tool.functions.some(func => 
-                        activeFilters.has(func)
-                    );
-                    if (hasMatchingFunction) {
+                    let matchesFilter = true;
+                    let matchesSearch = true;
+
+                    // Check function filters
+                    if (activeFilters.size > 0) {
+                        matchesFilter = tool.functions.some(func => 
+                            activeFilters.has(func)
+                        );
+                    }
+
+                    // Check search term
+                    if (searchTerm) {
+                        matchesSearch = 
+                            tool.name.toLowerCase().includes(searchTerm) ||
+                            tool.description.toLowerCase().includes(searchTerm) ||
+                            tool.functions.some(func => func.toLowerCase().includes(searchTerm));
+                    }
+
+                    if (matchesFilter && matchesSearch) {
                         foundTools.push({ ...tool, category: categoryKey, id: tool.id });
                     }
                 });
             });
 
             if (foundTools.length === 0) {
-                resultsContainer.innerHTML = '<div class="no-results"><h3>Keine Tools gefunden</h3><p>Keine Tools entsprechen den ausgewählten Funktionen.</p></div>';
+                resultsContainer.innerHTML = '<div class="no-results"><h3>Keine Tools gefunden</h3><p>Keine Tools entsprechen Ihren Suchkriterien.</p></div>';
                 return;
             }
 
@@ -1733,7 +2010,8 @@
                     request: 'Per Antrag',
                     free: 'Gratis',
                     recommended: 'Empfohlen',
-                    hardware: 'Hardware'
+                    hardware: 'Hardware',
+                    process: 'Prozess'
                 };
 
                 card.innerHTML = `
@@ -1828,7 +2106,8 @@
                 request: 'Schullizenz per Antrag',
                 free: 'Gratisangebot',
                 recommended: 'Empfehlenswert',
-                hardware: 'Hardware & Geräte'
+                hardware: 'Hardware & Geräte',
+                process: 'Prozessinformation'
             };
             
             document.getElementById('detail-icon').textContent = tool.icon;
@@ -1892,7 +2171,7 @@
                     <div class="detail-section">
                         <h3>Verfügbarkeit</h3>
                         <p><strong>${tool.availability}</strong></p>
-                        <p>Bitte kontaktieren Sie ${category === 'hardware' ? 'das Medienzentrum oder den' : 'das'} IT-Support-Team für eine ${category === 'hardware' ? 'Reservierung' : 'Lizenzanfrage'}.</p>
+                        <p>Bitte kontaktieren Sie ${category === 'hardware' ? 'das Medienzentrum oder den' : category === 'process' ? 'das' : 'das'} ${category === 'process' ? 'PIKT-Team' : 'IT-Support-Team'} für ${category === 'hardware' ? 'eine Reservierung' : category === 'process' ? 'weitere Informationen' : 'eine Lizenzanfrage'}.</p>
                     </div>
                 ` : ''}
                 
